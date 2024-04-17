@@ -5,12 +5,13 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Home from './Components/Home/Home'
-import SignUp from './Components/Forms/SignUp'
-import SignIn from './Components/Forms/SignIn'
+import Home from './Components/Home/Home';
+import SignUp from './Components/Forms/SignUp';
+import SignIn from './Components/Forms/SignIn';
+import Flight from './Components/Flights/Flight'; 
 
 
-import './main.scss'
+import './main.scss';
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
               element={<SignIn />}
             />
             <Route
+              path="/flight"
+              element={<Flight />} 
+            />
+            <Route
               path="*"
               element={<Navigate to="/" />}
             />
@@ -40,4 +45,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
