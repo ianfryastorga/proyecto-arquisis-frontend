@@ -11,6 +11,8 @@ import SignIn from './Components/Forms/SignIn'
 
 
 import './main.scss'
+import Flights from "./Components/FlightList/Flights";
+import FlightDetails from "./Components/FlightDetails/FlightDetails";
 
 function App() {
   return (
@@ -29,6 +31,14 @@ function App() {
             <Route
               path="/signin"
               element={<SignIn />}
+            />
+            <Route
+              path="/flights"
+              element={<Flights />}
+            />
+            <Route
+              path="/flights/:id"
+              element={<FlightDetails />}
             />
             <Route
               path="*"
