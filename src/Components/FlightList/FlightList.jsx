@@ -8,7 +8,7 @@ const FlightList = (props) => {
     const flights = props.flights;
     useEffect(() => {
         Aos.init({ duration: 2000 })
-      }, [])
+    }, [])
 
     console.log(flights);
     
