@@ -4,15 +4,6 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
 
-  // remove navBar on small screens
-  const [active, setActive] = useState('navBarMenu');
-  const showNavBar = () => {
-    setActive('navBarMenu showNavBar');
-  }
-  const removeNavBar = () => {
-    setActive('navBarMenu');
-  }
-
   // add bgcolor on second nabVar
   const [noBg, addBg] = useState('navBarTwo');
   const [btnBg, addBtnBg] = useState('btnNoBg');
@@ -34,12 +25,12 @@ const Navbar = () => {
   return (
     <div className='navBar flex'>
       <div className={noBg}>
-        <div className={active}>
+        <div className={'navBarMenu'}>
           <ul className="menu flex">
-            <li onClick={removeNavBar} className="listItem">Home</li>
-            <li onClick={removeNavBar} className="listItem">Acerca de</li>
-            <li onClick={removeNavBar} className="listItem">Oferta de vuelos</li>
-            <li onClick={removeNavBar} className="listItem">Destinos</li>
+            <li onClick={{}} className="listItem">Home</li>
+            <li onClick={{}} className="listItem">Acerca de</li>
+            <li onClick={()=>{navigate("/flights")}} className="listItem">Oferta de vuelos</li>
+            <li onClick={{}} className="listItem">Destinos</li>
           </ul>
         </div>
         <div className='flex'> 

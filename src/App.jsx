@@ -10,8 +10,9 @@ import SignUp from './Components/Forms/SignUp';
 import SignIn from './Components/Forms/SignIn';
 import Flight from './Components/Flights/Flight'; 
 
-
-import './main.scss';
+import './main.scss'
+import Flights from "./Components/FlightList/Flights";
+import FlightDetails from "./Components/FlightDetails/FlightDetails";
 
 function App() {
   return (
@@ -32,8 +33,13 @@ function App() {
               element={<SignIn />}
             />
             <Route
-              path="/flight/:id"
-              element={<Flight />} 
+              path="/flights/:id"
+              element={<Flight />}
+            />
+            <Route
+              path="/flights"
+              element={<Flights />}
+            />
             />
             <Route
               path="*"
