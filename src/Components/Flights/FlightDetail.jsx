@@ -1,4 +1,3 @@
-import React from 'react';
 import './FlightDetail.css';
 
 const FlightDetail = ({ flight, availableSeats, onReserveTicket }) => {

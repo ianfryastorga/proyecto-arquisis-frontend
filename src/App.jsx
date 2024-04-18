@@ -12,7 +12,6 @@ import Flight from './Components/Flights/Flight';
 
 import './main.scss'
 import Flights from "./Components/FlightList/Flights";
-import FlightDetails from "./Components/FlightDetails/FlightDetails";
 
 function App() {
   return (
@@ -39,7 +38,6 @@ function App() {
             <Route
               path="/flights"
               element={<Flights />}
-            />
             />
             <Route
               path="*"
