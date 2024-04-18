@@ -1,6 +1,7 @@
 import '../../App.css'
 import Navbar from '../Navbar/Navbar'
 import Landing from './Landing'
+import Search from '../Search/Search'
 
 
 function Home() {
@@ -8,6 +9,7 @@ function Home() {
         <>
             <Navbar />
             <Landing />
+            <Search />
         </>
     )
 }
