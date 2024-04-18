@@ -20,6 +20,11 @@
     margin: 10px 0;
   }
   
+  .flight-detail img {
+    width: 70px;
+    height: 70px;
+  }
+  
   .flight-detail button {
     background-color: #007bff;
     color: #fff;
