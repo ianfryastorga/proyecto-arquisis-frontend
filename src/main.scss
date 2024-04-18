@@ -271,11 +271,178 @@ h2 {
   }
 }
 
+// Search
+.search {
+  .sectionContainer {
+    width: 100%;
+    padding: 1.5rem;
+    border: 2px solid $grayBg;
+    border-radius: 16px;
+    row-gap: 2rem;
+
+    .btns {
+      background: $secondaryColor;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      flex-direction: column;
+      margin: auto;
+      width: 100%;
+
+      .singleBtn {
+        padding: 0.8rem 1.5rem;
+        font-size: 13px;
+        border-radius: 3rem;
+        width: 80%;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          background: $primaryColor;
+          color: $whiteColor;
+          font-weight: 500;
+          transition: 0.4s ease;
+        }
+      }
+
+      .active {
+        background: $primaryColor;
+        color: $whiteColor;
+        font-weight: 500;
+      }
+    }
+
+    .searchInputs {
+      width: 100%;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+
+      .singleInput {
+        .iconDiv {
+          padding: 16px 10px;
+          border-radius: 3rem;
+          background: $secondaryColor;
+          margin-right: 1rem;
+
+          .icon {
+            color: $blackColor;
+            opacity: 0.7;
+          }
+        }
+
+        .texts {
+          h4 {
+            padding-top: 0;
+            padding-bottom: 0.7rem;
+            color: $blackColor;
+            font-weight: 700;
+          }
+
+          input {
+            width: 95%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: $blackColor;
+            font-size: 12px;
+
+            &::placeholder {
+              color: $grayText;
+              opacity: 0.5s;
+            }
+          }
+        }
+      }
+      .btnBlock {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+//flights
+.flights {
+  .flightsContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+
+    .singleFlight {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: $whiteColor;
+      box-shadow: $boxShadow;
+      cursor: pointer;
+
+      .flightDetails {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+
+        .singleDetail {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+
+          .icon {
+            color: $primaryColor;
+          }
+
+          p {
+            font-size: 13px;
+            color: $blackColor;
+          }
+        }
+      }
+
+      .flightPrice {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+
+        h4 {
+          color: $blackColor;
+          font-weight: 700;
+        }
+
+        .btn {
+          padding: 0.5rem 1rem;
+          background: $primaryColor;
+          border-radius: 3rem;
+          color: $whiteColor;
+          cursor: pointer;
+
+          &:hover {
+            background: $hoverColor;
+          }
+        }
+      }
+
+      &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 20px rgba(0,0,0,.2);
+      }
+    }
+  }
+}
+
 // Adding media queries
 @media screen and (min-width: 480px) {
   // Home
   .home {
     padding-top: 8rem;
+  }
+  // Search
+  .search {
+    .sectionContainer {
+      .searchInputs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
   }
 }
 
@@ -293,6 +460,15 @@ h2 {
         position: absolute;
         width: 95%;
         top: -8%;
+      }
+    }
+  }
+  // Search
+  .search {
+    .sectionContainer {
+      .btns {
+        border-radius: 3rem;
+        flex-direction: row;
       }
     }
   }
@@ -316,6 +492,18 @@ h2 {
       .plane {
         width: 95%;
         top: -8%;
+      }
+    }
+  }
+  // Search
+  .search {
+    .sectionContainer {
+      .btns {
+        border-radius: 3rem;
+        flex-direction: row;
+      }
+      .searchInputs {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   }
@@ -370,6 +558,26 @@ h2 {
       }
     }
   }
+  // Search
+  .search {
+    .sectionContainer {
+      .btns {
+        width: 70%;
+        border-radius: 3rem;
+        flex-direction: row;
+      }
+      .searchInputs {
+        grid-template-columns: repeat(4, 1fr);
+        .singleInput {
+          .texts {
+            input {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 960px) {
@@ -379,6 +587,14 @@ h2 {
       padding-bottom: 1.5rem;
       font-size: 22px;
       line-height: 4rem;
+    }
+  }
+  // Search
+  .search {
+    .sectionContainer {
+      .searchInputs {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
   }
 }
@@ -407,7 +623,7 @@ h2 {
       padding: 1.5rem 5rem;
     }
     .navbar_With_Bg {
-      padding: 0 5rem;
+      padding: 2rem 5rem;
     }
   }
   .home {
@@ -430,6 +646,13 @@ h2 {
       .plane {
         width: 100%;
         top: -10%;
+      }
+    }
+  }
+  .search {
+    .sectionContainer {
+      .btns {
+        width: 50%;
       }
     }
   }
