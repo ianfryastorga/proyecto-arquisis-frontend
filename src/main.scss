@@ -84,14 +84,17 @@ li {
   }
 }
 
-.btnNoBg {
-  padding: 0.7rem 1.5rem;
+.bg1 {
+  background: $colorOne;
+}
+
+.bg2 {
   background: $whiteColor;
-  border: none;
-  outline: none;
-  border-radius: 3rem;
-  cursor: pointer;
   color: $blackColor;
+
+  &:hover {
+    background: $whiteColor;
+  }
 }
 
 img,

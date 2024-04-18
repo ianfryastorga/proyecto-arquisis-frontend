@@ -1,7 +1,7 @@
 const SignUp = () => {
     return (
         <div className="auth-wrapper">
-                <div className="auth-inner">
+            <div className="auth-inner">
                 <form>
                     <h3>Sign Up</h3>
 
@@ -38,7 +38,7 @@ const SignUp = () => {
                         Ya tienes cuenta: <a href="/signin">Ingresar</a>
                     </p>
                     <p className="forgot-password text-right">
-                            <a href="/">Volver</a>
+                        <a href="/">Volver</a>
                     </p>
                 </form>
             </div>
