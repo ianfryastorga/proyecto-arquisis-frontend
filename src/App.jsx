@@ -32,7 +32,7 @@ function App() {
               element={<SignIn />}
             />
             <Route
-              path="/flight"
+              path="/flight/:id"
               element={<Flight />} 
             />
             <Route
@@ -46,3 +46,4 @@ function App() {
 }
 
 export default App;
+
