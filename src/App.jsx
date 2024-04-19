@@ -13,11 +13,13 @@ import Flight from './Components/Flights/Flight';
 
 import './main.scss'
 import Flights from "./Components/FlightList/Flights";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
     return (
         <>
             <Router>
+                <Navbar />
                 <Routes>
                     <Route
                         exact

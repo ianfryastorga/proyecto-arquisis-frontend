@@ -12,7 +12,7 @@ import 'aos/dist/aos.css'
 function Search() {
     const navigate = useNavigate()
     useEffect(() => {
-        Aos.init({ duration: 2000 })
+        Aos.init({ duration: 1000 })
     }, [])
 
     const [departure, setOrigin] = useState('')
@@ -29,8 +29,7 @@ function Search() {
         if (arrival) queryParams.arrival = arrival
         if (moment(queryParams.date, 'DD/MM/YYYY', true).isValid()) queryParams.date = date
 
-        console.log(queryParams)
-        axios.get('http://localhost:8000/flights', { params: queryParams })
+        axios.get('http://127.0.0.1:3000/flights', { params: queryParams })
             .then(response => {
                 console.log(response.data)
                 navigate(
@@ -49,9 +48,9 @@ function Search() {
 
     return (
         <div className="search section container">
-            <div data-aos='fade-up' data-aos-duration='2500' className="sectionContainer">
+            <div data-aos='fade-up' data-aos-duration='1000' className="sectionContainer">
 
-                <div data-aos='fade-up' data-aos-duration='2000' className="searchInputs flex">
+                <div data-aos='fade-up' data-aos-duration='500' className="searchInputs flex">
                     <div className="singleInput flex">
                         <div className="iconDiv">
                             <HiOutlineLocationMarker className="icon" />
