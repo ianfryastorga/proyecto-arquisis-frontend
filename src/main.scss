@@ -82,18 +82,32 @@ li {
   &:hover {
     background: $hoverColor;
   }
+
+}
+
+.btnBack {
+  background: none;
+  padding: 0.7rem 0.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $primaryColor;
+  }
 }
 
 .bg1 {
   background: $colorOne;
 }
 
-.bg2 {
-  background: $whiteColor;
+.noBg {
+  background: none;
   color: $blackColor;
 
   &:hover {
-    background: $whiteColor;
+    color: $primaryColor;
+    background: none;
   }
 }
 
@@ -371,6 +385,15 @@ h2 {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
+    padding-bottom: 3rem;
+
+    .flightsPage {
+      .pageButton {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+    }
 
     .singleFlight {
       padding: 1.5rem;
@@ -378,59 +401,171 @@ h2 {
       background: $whiteColor;
       box-shadow: $boxShadow;
       cursor: pointer;
-
-      .flightDetails {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-
-        .singleDetail {
-          display: flex;
-          gap: 0.5rem;
-          align-items: center;
-
-          .icon {
-            color: $primaryColor;
-          }
-
-          p {
-            font-size: 13px;
-            color: $blackColor;
-          }
-        }
-      }
-
-      .flightPrice {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 1rem;
-
-        h4 {
-          color: $blackColor;
-          font-weight: 700;
-        }
-
-        .btn {
-          padding: 0.5rem 1rem;
-          background: $primaryColor;
-          border-radius: 3rem;
-          color: $whiteColor;
-          cursor: pointer;
-
-          &:hover {
-            background: $hoverColor;
-          }
-        }
-      }
+      display: grid;
+      grid-template-columns: 13fr 4fr;
+      gap: 1rem;
+      align-items: center;
+      text-align: center;
 
       &:hover {
           transform: translateY(-5px);
           box-shadow: 0 15px 20px rgba(0,0,0,.2);
       }
     }
+
+    .noFlight {
+      padding-top: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+
+      h3 {
+        color: lightgray;
+      }
+    }
   }
 }
+
+.flightDetails {
+  display: grid;
+  grid-template-columns: 4fr 1fr 4fr;
+  gap: 1rem;
+  text-align: center;
+
+  .flightAirportInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+
+    .icon {
+      color: $primaryColor;
+    }
+    
+    h6 {
+      font-size: 11px;
+      padding: 0;
+      font-weight: 400;
+      color: $textColor;
+    }
+  }
+  .middleList {
+    .flightLogo {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .flightDuration {
+      padding-top: 0.5rem;
+      align-items: center;
+    }
+  }
+}
+
+.price {
+  color: $primaryColor;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+//FlightDetails
+.flightDetail {
+  padding-inline: 4rem;
+  padding-top: 7rem;
+  align-items: center;
+  justify-content: center;
+
+  .flightContainer {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 24fr 10fr;
+    
+    .flightInfo {
+      border: 3px solid $secondaryColor;
+      border-right-width: 0;
+      border-radius: 2rem 0 0 2rem;
+      box-shadow: 0 5px 10px rgba(0,0,0,.2);
+      
+      .back {
+        padding-left: 3rem;
+        padding-top: 0.5rem;
+        display: flex;
+        justify-items: left;
+      }
+
+      .infoContainer {
+        text-align: left;
+        padding-inline: 4rem;
+        padding-top: 0.7rem;
+        
+        h2 {
+          color: $blackColor;
+          font-size: 1.5rem;
+        }
+
+        h4 {
+          color: $blackColor;
+          font-size: 1.1rem;
+        }
+
+        .airlineInfo {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          align-items: center; 
+        }  
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+    
+
+    .flightImage {
+      border: 3px solid $secondaryColor;
+      border-left-width: 0;
+      box-shadow: 0 5px 10px rgba(0,0,0,.2);
+      border-radius: 0 2rem 2rem 0;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0 2rem 2rem 0;
+      }
+    }
+  }
+}
+
+//Profile
+.profile {
+  .profileContainer {
+    padding-top: 10rem;
+    text-align: center;
+    gap: 2rem;
+    flex-direction: row;
+
+    .profileImage {
+      width: 100%;
+      height: 100%;
+      max-height: 50px;
+      max-width: 50px;
+      border-radius: 1rem;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
 
 // Adding media queries
 @media screen and (min-width: 480px) {
@@ -614,7 +749,7 @@ h2 {
     font-size: 27px;
   }
   .section {
-    padding: 6rem 0 4rem;
+    padding: 6rem 0 3rem;
   }
   .container {
     width: 77%;
@@ -700,3 +835,14 @@ h2 {
   background: $primaryColor;
   border-radius: 10px;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number']{
+  width: 25px;
+} 

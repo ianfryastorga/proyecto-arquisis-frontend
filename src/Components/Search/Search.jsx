@@ -12,7 +12,7 @@ import 'aos/dist/aos.css'
 function Search() {
     const navigate = useNavigate()
     useEffect(() => {
-        Aos.init({ duration: 2000 })
+        Aos.init({ duration: 1000 })
     }, [])
 
     const [departure, setOrigin] = useState('')
@@ -29,15 +29,18 @@ function Search() {
         if (arrival) queryParams.arrival = arrival
         if (moment(queryParams.date, 'DD/MM/YYYY', true).isValid()) queryParams.date = date
 
-        console.log(queryParams)
-        axios.get('http://localhost:8000/flights', { params: queryParams })
+        axios.get(`${ process.env.BACKEND_URL }/flights`, { params: queryParams })
             .then(response => {
                 console.log(response.data)
                 navigate(
                     '/flights',
                     {
                         state: {
-                            flights: response.data.flights
+                            params: queryParams,
+                            flights: response.data.flights,
+                            page: response.data.page,
+                            count: response.data.count,
+                            totalCount: response.data.totalCount
                         }
                     }
                 )
@@ -49,9 +52,9 @@ function Search() {
 
     return (
         <div className="search section container">
-            <div data-aos='fade-up' data-aos-duration='2500' className="sectionContainer">
+            <div data-aos='fade-up' data-aos-duration='1000' className="sectionContainer">
 
-                <div data-aos='fade-up' data-aos-duration='2000' className="searchInputs flex">
+                <div data-aos='fade-up' data-aos-duration='500' className="searchInputs flex">
                     <div className="singleInput flex">
                         <div className="iconDiv">
                             <HiOutlineLocationMarker className="icon" />

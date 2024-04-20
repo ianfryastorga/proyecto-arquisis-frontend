@@ -17,7 +17,7 @@ const Landing = () => {
     return (
         <div className='home flex container'>
             <div className="mainText">
-                <h1 data-aos='fade-up' data-aos-duration='2500' >Fly with us and experience the world</h1>
+                <h1 data-aos='fade-up' data-aos-duration='2500' >Elige tu destino y vuela con nosotros</h1>
             </div>
             <div className="homeImages flex">
                 <div className="videoDiv">
