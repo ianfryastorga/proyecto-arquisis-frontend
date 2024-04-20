@@ -5,9 +5,7 @@ import {
     Navigate,
 } from "react-router-dom";
 
-import Home from './Components/Home/Home'
-import SignUp from './Components/Forms/SignUp'
-import SignIn from './Components/Forms/SignIn'
+import Home from './Components/Home/Home';
 import Profile from "./Components/Profile/Profile";
 import Flight from './Components/Flights/Flight'; 
 
@@ -25,14 +23,6 @@ function App() {
                         exact
                         path="/"
                         element={<Home />}
-                    />
-                    <Route
-                        path="/signup"
-                        element={<SignUp />}
-                    />
-                    <Route
-                        path="/signin"
-                        element={<SignIn />}
                     />
                     <Route
                         path="/flights/:id"

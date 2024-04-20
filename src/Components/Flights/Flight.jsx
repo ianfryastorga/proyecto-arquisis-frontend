@@ -12,7 +12,7 @@ const Flight = () => {
     useEffect(() => {
         const fetchFlightData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/flights/${id}`);
+                const response = await axios.get(`${ process.env.BACKEND_URL }/flights/${id}`);
                 setFlightData(response.data);
             } catch (error) {
                 console.error('Error fetching flight data:', error);

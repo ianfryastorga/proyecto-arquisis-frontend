@@ -1,4 +1,3 @@
-import '../../App.css'
 import Landing from './Landing'
 import Search from '../Search/Search'
 

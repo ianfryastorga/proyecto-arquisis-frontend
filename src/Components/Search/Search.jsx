@@ -29,14 +29,18 @@ function Search() {
         if (arrival) queryParams.arrival = arrival
         if (moment(queryParams.date, 'DD/MM/YYYY', true).isValid()) queryParams.date = date
 
-        axios.get('http://127.0.0.1:3000/flights', { params: queryParams })
+        axios.get(`${ process.env.BACKEND_URL }/flights`, { params: queryParams })
             .then(response => {
                 console.log(response.data)
                 navigate(
                     '/flights',
                     {
                         state: {
-                            flights: response.data.flights
+                            params: queryParams,
+                            flights: response.data.flights,
+                            page: response.data.page,
+                            count: response.data.count,
+                            totalCount: response.data.totalCount
                         }
                     }
                 )

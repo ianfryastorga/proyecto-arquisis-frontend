@@ -6,19 +6,28 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Flights = () => {
     const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+    const location = useLocation();
     if (!isLoading && !isAuthenticated) {
         return loginWithRedirect();
     }
-    const location = useLocation();
     let flights;
+    let page;
+    let count;
+    let totalCount;
+    let params;
     if (location.state) {
         flights = location.state.flights;
+        page = location.state.page;
+        count = location.state.count;
+        totalCount = location.state.totalCount;
+        params = location.state.params;
     }
 
     return (
         <>
             <Search />
-            <FlightList flights={flights} />
+            <FlightList flights={flights} page={page} count={count} 
+                totalCount={totalCount} params={params}/>
         </>
     )
 }
