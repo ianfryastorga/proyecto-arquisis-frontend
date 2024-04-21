@@ -38,6 +38,10 @@ const FlightList = (props) => {
     const count = props.count;
     const totalCount = props.totalCount;
     const params = props.params;
+    let quantity = props.quantity;
+    if (!quantity) {
+        quantity = 0
+    }
 
     const handlePreviousPage = () => {
         params.page = page - 1
@@ -96,6 +100,8 @@ const FlightList = (props) => {
         </button>
     ) : null
 
+    console.log(flights)
+
     return (
         <div data-aos='fade-up' data-aos-duration='1000' className='flights flex container'> 
             <ul data-aos='fade-up' data-aos-duration='500' className='flightsContainer'>
@@ -107,7 +113,7 @@ const FlightList = (props) => {
                     <h5>&nbsp;de {Math.ceil(totalCount/count)}</h5>
                 </div>
                 {flights.map((flight) => (
-                    <li onClick={()=>{navigate("/flights/"+flight.id)}} className="singleFlight" key={flight.id}>
+                    flight.quantity > quantity?(<li onClick={()=>{navigate("/flights/"+flight.id)}} className="singleFlight" key={flight.id}>
                         <div className='flightDetails grid'>
                             <div className='flightAirportInfo'>
                                 <h5>{flight.departureAirportId} - {flight.departureAirportName}</h5>
@@ -131,7 +137,7 @@ const FlightList = (props) => {
                         <div className='price'>
                             { flight.currency } { flight.price }
                         </div>
-                    </li>
+                    </li>):null
                 ))}
             </ul>
         </div>

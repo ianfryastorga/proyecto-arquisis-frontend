@@ -20,8 +20,6 @@ function Search() {
     const [passengers, setPassengers] = useState('')
     const [date, setDate] = useState('')
 
-    console.log(passengers);
-
     const handleSubmit = (e) => {
         e.preventDefault()
         const queryParams = {}
@@ -40,7 +38,8 @@ function Search() {
                             flights: response.data.flights,
                             page: response.data.page,
                             count: response.data.count,
-                            totalCount: response.data.totalCount
+                            totalCount: response.data.totalCount,
+                            quantity: passengers
                         }
                     }
                 )
@@ -89,7 +88,7 @@ function Search() {
                         </div>
                         <div className="texts">
                             <h4>Fecha</h4>
-                            <input type="date" placeholder='Fecha de vuelo' onChange={(e) => {console.log(e.target.value); setDate(moment(e.target.value, 'YYYY-MM-DD').format('DD/MM/YYYY'))}} />
+                            <input type="date" placeholder='Fecha de vuelo' onChange={(e) => {setDate(moment(e.target.value, 'YYYY-MM-DD').format('DD/MM/YYYY'))}} />
                         </div>
                     </div>
                     <button className='btn btnBlock flex' onClick={handleSubmit}>Search Flights</button>

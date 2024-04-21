@@ -1,5 +1,5 @@
 import flightImage from '../../assets/flightDetails.jpg';
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { LuPlane } from "react-icons/lu";
@@ -9,12 +9,11 @@ import { useNavigate } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa6";
 import PassengerInput from './PassengerInfo';
 
-const FlightDetail = ({ flight, availableSeats, onReserveTicket }) => {
+const FlightDetail = ({ flight, availableSeats, onReserveTicket, passengers, setPassengers}) => {
     const navigate = useNavigate();
     useEffect(() => {
         Aos.init({ duration: 1000 })
     }, [])
-    const [passengers, setPassengers] = useState(0);
     
     if (!flight) {
         return <p>Cargando datos del vuelo...</p>;
@@ -64,7 +63,7 @@ const FlightDetail = ({ flight, availableSeats, onReserveTicket }) => {
                     <p>Disponibles: {availableSeats}</p>
                     <PassengerInput passengers={passengers} setPassengers={setPassengers} />
                 </div>
-                <button className="btn" onClick={onReserveTicket}>Reservar pasajes</button>
+                <button className="btn" onClick={() => {onReserveTicket(passengers)}}>Reservar pasajes</button>
             </div>
             <div className="flightImage">
                 <img src={flightImage} alt="Mapa de la ruta" />

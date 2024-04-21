@@ -143,6 +143,36 @@ h2 {
   color: $blackColor;
 }
 
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  padding-top: 60px;
+
+
+  .modalContent {
+    padding-block: 2rem;
+    text-align: center;
+    width: 20%;
+    background-color: #fefefe;
+    margin: 12% auto; /* 15% from the top and centered */
+    border: 1px solid $secondaryColor;
+    box-shadow: $boxShadow;
+    border-radius: 2rem;
+
+    .message {
+      padding-inline: 1rem;
+      padding-bottom: 1rem;
+      color: $blackColor;
+    }
+  }
+}
+
+
 // navbar
 .navBar {
   position: fixed;
