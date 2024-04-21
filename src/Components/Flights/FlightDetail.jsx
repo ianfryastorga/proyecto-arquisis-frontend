@@ -31,7 +31,7 @@ const FlightDetail = ({ flight, availableSeats, onReserveTicket, passengers, set
         <div data-aos='fade-up' data-aos-duration='1000' className="flightContainer">
             <div data-aos='fade-up' data-aos-duration='500' className="flightInfo">
                 <div className='back'>
-                    <button className='btnBack' onClick={() => navigate(-1)}><FaAngleLeft />Go back</button>
+                    <button className='btnBack' onClick={() => navigate(-1)}><FaAngleLeft />Regresar</button>
                 </div>
                 <div className='infoContainer'>
                     <h2>Detalles del vuelo</h2>
