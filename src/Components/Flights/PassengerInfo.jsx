@@ -3,11 +3,16 @@ import { FaPlus, FaMinus } from "react-icons/fa6";
 const PassengerInput = ({passengers, setPassengers}) => {
 
     const handleChange = (event) => {
+        if (event.target.value < 0 || event.target.value > 4) {
+            return;
+        }
         setPassengers(event.target.value);
     };
 
     const handleIncrement = () => {
-        setPassengers(passengers + 1);
+        if (passengers < 4) {
+            setPassengers(passengers + 1);
+        }
     };
 
     const handleDecrement = () => {
