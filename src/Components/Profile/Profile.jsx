@@ -14,11 +14,6 @@ const Profile = () => {
                 <h2>{user.name}</h2>
                 <p>{user.email}</p>
             </div>
-            <div className="row">
-                <pre className="col-12 text-light bg-dark p-4">
-                    {JSON.stringify(user, null, 2)}
-                </pre>
-            </div>
         </div>
     );
 };
