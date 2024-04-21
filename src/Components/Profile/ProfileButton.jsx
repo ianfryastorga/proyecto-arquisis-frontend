@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileButton = () => {
     const navigate = useNavigate();
-    const { isAuthenticated, isLoading } = useAuth0();
+    const { isAuthenticated } = useAuth0();
 
 
-    if (!isLoading && isAuthenticated) {
+    if ( isAuthenticated ) {
         return <button className={'listItem btn btnTwo noBg'} onClick={() => {navigate("/profile")}}>Perfil</button>;
     }
 };

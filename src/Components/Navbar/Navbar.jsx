@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import LoginButton from '../Forms/LogInButton';
 import LogoutButton from '../Forms/LogOutButton';
+import SignupButton from '../Forms/SignUpButton';
 import ProfileButton from '../Profile/ProfileButton';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -28,13 +29,14 @@ const Navbar = () => {
                         <li onClick={()=>{navigate("/home")}} className="listItem">Home</li>
                         <li onClick={()=>{navigate("/flights")}} className="listItem">Oferta de vuelos</li>
                         {isAuthenticated &&
-                        <li onClick={()=>{navigate("/home")}} className="listItem">Mis compras</li>}
+                        <li onClick={()=>{navigate("/reservations")}} className="listItem">Mis compras</li>}
                     </ul>
                 </div>
                 <div className='menu flex'> 
                     <ProfileButton/>
                     <LoginButton/>
                     <LogoutButton/>
+                    <SignupButton/>
                 </div>
             </div>
         </div>

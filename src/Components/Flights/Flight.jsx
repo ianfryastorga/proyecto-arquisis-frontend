@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom';
 import FlightDetail from './FlightDetail';
 import { useAuth0 } from "@auth0/auth0-react";
 import ReservationMessage from './ReservationMessage';
+import moment from 'moment-timezone';
 
 const Flight = () => {
     const { id } = useParams();
     const [flightData, setFlightData] = useState(null);
     const [availableSeats, setAvailableSeats] = useState(0);
-    const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+    const { user } = useAuth0();
     const [modalOpen, setModalOpen] = useState(false);
     const [message, setMessage] = useState('');
     const [passengers, setPassengers] = useState(0);
@@ -37,15 +38,16 @@ const Flight = () => {
             return;
         }
         axios.post(`${ process.env.BACKEND_URL }/requests`,  {
-            requestId:"uuid",
-            groupId:"11",
-            departureAirport: flightData.departureAirportId,
-            arrivalAirport: flightData.arrivalAirportId,
-            departureTime: flightData.departureTime,
-            datetime: "actual",
-            depositToken: "",
-            quantity: passengers,
-            seller: 0
+            "requestId":"uuid",
+            "groupId":"11",
+            "departureAirport":flightData.departureAirportId,
+            "arrivalAirport": flightData.arrivalAirportId,
+            "departureTime": flightData.departureTime,
+            "datetime": moment().tz("America/Santiago").format("YYYY-MM-DD HH:mm:ss"),
+            "depositToken":"",
+            "quantity":passengers,
+            "seller":0,
+            "username": user.name
         }).then(response => {
             console.log(response.data);
             setMessage('Reserva realizada');
@@ -55,10 +57,6 @@ const Flight = () => {
             console.error(error)
         });
     };
-    
-    if (!isLoading && !isAuthenticated) {
-        return loginWithRedirect();
-    }
 
     return (
         <div className='flightDetail'>

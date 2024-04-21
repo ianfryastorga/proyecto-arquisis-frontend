@@ -8,12 +8,19 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa6";
 import PassengerInput from './PassengerInfo';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const FlightDetail = ({ flight, availableSeats, onReserveTicket, passengers, setPassengers}) => {
+    const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
     const navigate = useNavigate();
     useEffect(() => {
         Aos.init({ duration: 1000 })
     }, [])
+
+    if (!isLoading && !isAuthenticated) {
+        loginWithRedirect();
+        return;
+    }
     
     if (!flight) {
         return <p>Cargando datos del vuelo...</p>;
