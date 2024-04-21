@@ -47,7 +47,6 @@ const FlightList = (props) => {
         params.page = page - 1
         axios.get(`${ process.env.BACKEND_URL }/flights`, { params: params })
             .then(response => {
-                console.log(response.data)
                 navigate(
                     '/flights',
                     {
@@ -69,7 +68,6 @@ const FlightList = (props) => {
         params.page = page + 1
         axios.get(`${ process.env.BACKEND_URL }/flights`, { params: params })
             .then(response => {
-                console.log(response.data)
                 navigate(
                     '/flights',
                     {
@@ -103,7 +101,7 @@ const FlightList = (props) => {
     console.log(flights)
 
     return (
-        <div data-aos='fade-up' data-aos-duration='1000' className='flights flex container'> 
+        <div data-aos='fade-up' data-aos-duration='1000' className='flights container'> 
             <ul data-aos='fade-up' data-aos-duration='500' className='flightsContainer'>
                 <div className='flightsPage flex'>
                     <h5>Página&nbsp;</h5>

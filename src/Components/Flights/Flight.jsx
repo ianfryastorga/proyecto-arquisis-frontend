@@ -14,6 +14,7 @@ const Flight = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [message, setMessage] = useState('');
     const [passengers, setPassengers] = useState(0);
+    const [ipAddress, setIPAddress] = useState('');
 
     useEffect(() => {
         const fetchFlightData = async () => {
@@ -30,6 +31,14 @@ const Flight = () => {
         };
         fetchFlightData();
     }, [id]);
+
+    useEffect(() => {
+        axios.get('https://geolocation-db.com/json/')
+            .then(data => {
+                setIPAddress(data.data.IPv4)
+            })
+            .catch(error => console.log(error))
+    }, [])
     
     const handleReserveTicket = (quantity) => {
         if (quantity > availableSeats || quantity < 1 || quantity > 4) {
@@ -47,7 +56,8 @@ const Flight = () => {
             "depositToken":"",
             "quantity":passengers,
             "seller":0,
-            "username": user.name
+            "username": user.name,
+            "ipAddress": ipAddress
         }).then(response => {
             console.log(response.data);
             setMessage('Reserva realizada');
