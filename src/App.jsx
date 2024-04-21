@@ -1,43 +1,59 @@
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
+    Routes,
+    Route,
+    Navigate,
 } from "react-router-dom";
-
-import Home from './Components/Home/Home'
-import SignUp from './Components/Forms/SignUp'
-import SignIn from './Components/Forms/SignIn'
-
-
 import './main.scss'
 
+import Home from './Components/Home/Home';
+import Profile from "./Components/Profile/Profile";
+import Flight from './Components/Flights/Flight'; 
+
+import Flights from "./Components/FlightList/Flights";
+import Navbar from "./Components/Navbar/Navbar";
+import Reservations from "./Components/Reservations/Reservations";
+import Loading from "./Components/Loading/Loading";
+import { useAuth0 } from "@auth0/auth0-react";
+
 function App() {
-  return (
-    <>
-      <Router>
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/signup"
-              element={<SignUp />}
-            />
-            <Route
-              path="/signin"
-              element={<SignIn />}
-            />
-            <Route
-              path="*"
-              element={<Navigate to="/" />}
-            />
-          </Routes>
-      </Router>
-    </>
-  )
+    const { isLoading } = useAuth0();
+
+    if (isLoading) {
+        return <Loading />;
+    }
+    return (
+        <>
+            <Navbar />
+            <Routes>
+                <Route
+                    exact
+                    path="/"
+                    element={<Home />}
+                />
+                <Route
+                    path="/flights/:id"
+                    element={<Flight />}
+                />
+                <Route
+                    path="/flights"
+                    element={<Flights />}
+                />
+                <Route
+                    path="/reservations"
+                    element={<Reservations />}
+                />
+                <Route
+                    path="/profile"
+                    element={<Profile />}
+                />
+                <Route
+                    path="*"
+                    element={<Navigate to="/" />}
+                />
+            </Routes>
+        </>
+    )
 }
 
-export default App
+export default App;
+

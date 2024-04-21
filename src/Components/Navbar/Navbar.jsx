@@ -1,54 +1,46 @@
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import LoginButton from '../Forms/LogInButton';
+import LogoutButton from '../Forms/LogOutButton';
+import SignupButton from '../Forms/SignUpButton';
+import ProfileButton from '../Profile/ProfileButton';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { isAuthenticated } = useAuth0();
 
-  // remove navBar on small screens
-  const [active, setActive] = useState('navBarMenu');
-  const showNavBar = () => {
-    setActive('navBarMenu showNavBar');
-  }
-  const removeNavBar = () => {
-    setActive('navBarMenu');
-  }
-
-  // add bgcolor on second nabVar
-  const [noBg, addBg] = useState('navBarTwo');
-  const [btnBg, addBtnBg] = useState('btnNoBg');
-  const addBgColor = () => {
-    if (window.scrollY >= 10) {
-      addBg('navBarTwo navbar_With_Bg');
-      addBtnBg('btnNoBg btnBg');
-    } else {
-      addBg('navBarTwo')
-      addBtnBg('btnNoBg');
+    // add bgcolor on second nabVar
+    const [noBg, addBg] = useState('navBarTwo');
+    const addBgColor = () => {
+        if (window.scrollY >= 10) {
+            addBg('navBarTwo navbar_With_Bg');
+        } else {
+            addBg('navBarTwo')
+        }
     }
-  }
-  window.addEventListener('scroll', addBgColor)
+    window.addEventListener('scroll', addBgColor)
 
-  const signUp = () => {
-    navigate('/signup');
-  }
-
-  return (
-    <div className='navBar flex'>
-      <div className={noBg}>
-        <div className={active}>
-          <ul className="menu flex">
-            <li onClick={removeNavBar} className="listItem">Home</li>
-            <li onClick={removeNavBar} className="listItem">Acerca de</li>
-            <li onClick={removeNavBar} className="listItem">Oferta de vuelos</li>
-            <li onClick={removeNavBar} className="listItem">Destinos</li>
-          </ul>
+    return (
+        <div className='navBar flex'>
+            <div className={noBg}>
+                <div className="navBarMenu">
+                    <ul className="menu flex">
+                        <li onClick={()=>{navigate("/home")}} className="listItem">Home</li>
+                        <li onClick={()=>{navigate("/flights")}} className="listItem">Oferta de vuelos</li>
+                        {isAuthenticated &&
+                        <li onClick={()=>{navigate("/reservations")}} className="listItem">Mis compras</li>}
+                    </ul>
+                </div>
+                <div className='menu flex'> 
+                    <ProfileButton/>
+                    <LoginButton/>
+                    <LogoutButton/>
+                    <SignupButton/>
+                </div>
+            </div>
         </div>
-        <div className='flex'> 
-          <a className={btnBg} href="/signin"> Sign in </a>
-          <button onClick={signUp} className='btn btnTwo'>Sign up</button>
-        </div>
-      </div>
-    </div>
-  )
+    )
 }
 
 export default Navbar;
