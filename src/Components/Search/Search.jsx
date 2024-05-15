@@ -25,8 +25,7 @@ function Search() {
         const queryParams = {}
         if (departure) queryParams.departure = departure
         if (arrival) queryParams.arrival = arrival
-        if (moment(queryParams.date, 'DD/MM/YYYY', true).isValid()) queryParams.date = date
-
+        if (moment(date, 'DD/MM/YYYY', true).isValid()) queryParams.date = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD')
         axios.get(`${ process.env.BACKEND_URL }/flights`, { params: queryParams })
             .then(response => {
                 console.log(response.data)
