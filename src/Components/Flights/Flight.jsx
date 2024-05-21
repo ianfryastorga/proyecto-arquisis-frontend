@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import FlightDetail from './FlightDetail';
@@ -7,6 +8,7 @@ import ReservationMessage from './ReservationMessage';
 import moment from 'moment-timezone';
 
 const Flight = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [flightData, setFlightData] = useState(null);
     const [availableSeats, setAvailableSeats] = useState(0);
@@ -57,12 +59,17 @@ const Flight = () => {
             "quantity":passengers,
             "seller":0,
             "username": user.name,
-            "ipAddress": ipAddress
+            "ipAddress": ipAddress,
+            "price": flightData.price,
         }).then(response => {
             console.log(response.data);
-            setMessage('Reserva realizada');
-            setModalOpen(true);
-            setAvailableSeats(prevSeats => prevSeats - quantity);
+            if (response.data?.url && response.data?.depositToken) {
+                navigate(`/flights/${response.data.requestId}/confirm-purchase`)
+            }
+            else {
+                setMessage('Error al generar la reserva');
+                setModalOpen(true);
+            }
         }).catch(error => {
             console.error(error)
         });
