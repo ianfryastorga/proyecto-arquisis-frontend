@@ -2,13 +2,11 @@ import flightImage from '../../assets/flightDetails.jpg';
 import { useEffect } from 'react'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import { LuPlane } from "react-icons/lu";
-import { IoRemoveOutline } from "react-icons/io5";
-import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import { FaAngleLeft } from "react-icons/fa6";
 import PassengerInput from './PassengerInfo';
 import { useAuth0 } from '@auth0/auth0-react';
+import FlightRoute from './FlightRoute';
 
 const FlightDetail = ({ flight, availableSeats, onReserveTicket, passengers, setPassengers}) => {
     const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
@@ -39,26 +37,7 @@ const FlightDetail = ({ flight, availableSeats, onReserveTicket, passengers, set
                         { flight.currency } { flight.price }
                     </div>
                     <h4> Ruta </h4>
-                    <div className='flightDetails grid'>
-                        <div className='flightAirportInfo'>
-                            <h5>{flight.departureAirportId} - {flight.departureAirportName}</h5>
-                            <h6>{moment(flight.departureTime, "YYYY-MM-DD HH:mm:ss").format("DD/MM/YYYY")}</h6>
-                            <h6>{moment(flight.departureTime, "YYYY-MM-DD HH:mm:ss").format("HH:mm")}</h6>
-                        </div>
-                        <div className='middleList'>
-                            <div className='flightLogo'>
-                                <IoRemoveOutline/><LuPlane /><IoRemoveOutline/>
-                            </div>
-                            <div className='flightDuration'>
-                                { flight.duration > 60 ? Math.floor(flight.duration / 60) + 'h ' + flight.duration % 60 + 'm' : flight.duration + 'm'}
-                            </div>
-                        </div>
-                        <div className='flightAirportInfo'>
-                            <h5>{flight.arrivalAirportId} - {flight.arrivalAirportName}</h5>
-                            <h6>{moment(flight.arrivalTime, "YYYY-MM-DD HH:mm:ss").format("DD/MM/YYYY")}</h6>
-                            <h6>{moment(flight.arrivalTime, "YYYY-MM-DD HH:mm:ss").format("HH:mm")}</h6>
-                        </div>
-                    </div>
+                    < FlightRoute flight={flight} />
                     <h4> Operado por </h4>
                     <div className='airlineInfo'>
                         <div>{flight.airline} </div>

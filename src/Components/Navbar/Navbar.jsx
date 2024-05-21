@@ -26,7 +26,7 @@ const Navbar = () => {
             <div className={noBg}>
                 <div className="navBarMenu">
                     <ul className="menu flex">
-                        <li onClick={()=>{navigate("/home")}} className="listItem">Home</li>
+                        <li onClick={()=>{navigate("/")}} className="listItem">Home</li>
                         <li onClick={()=>{navigate("/flights")}} className="listItem">Oferta de vuelos</li>
                         {isAuthenticated &&
                         <li onClick={()=>{navigate("/reservations")}} className="listItem">Mis compras</li>}
