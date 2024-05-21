@@ -33,7 +33,7 @@ function App() {
                     element={<Home />}
                 />
                 <Route
-                    path="/flights/:id/confirm-purchase"
+                    path="/flights/:id/:request_id/confirm-purchase"
                     element={<ConfirmPurchase />}
                 />
                 <Route

@@ -40,12 +40,12 @@ const DonePurchase = () => {
     console.log(data)
 
     return (
-        <div className='flightDetail'>
-            <div data-aos='fade-up' data-aos-duration='1000' className="flightContainer">
-                <div className="p-8 mt-20 flex flex-col gap-3 w-1/3 mx-auto rounded-xl shadow-[0_0px_8px_#b4b4b4]">
-                    <h1 className="text-center">Purchase Completed</h1>
-                    <p>{data.message}</p>
-                    <Link to="/" className="bg-black text-white px-3 py-2 rounded text-center">Volver a inicio</Link>
+        <div className='purchase'>
+            <div data-aos='fade-up' data-aos-duration='1000' className="purchaseContainer">
+                <div className='purchaseForm'>
+                    <h1 className='purchaseTitle'>Resultado de compra</h1>
+                    <div className="purchaseMessage">{data.message}</div>
+                    <Link to="/" className="btn">Volver a inicio</Link>
                 </div>
             </div>
         </div>
