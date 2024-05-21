@@ -64,7 +64,7 @@ const Flight = () => {
         }).then(response => {
             console.log(response.data);
             if (response.data?.url && response.data?.depositToken) {
-                navigate(`/flights/${response.data.requestId}/confirm-purchase`)
+                navigate(`/flights/${id}/${response.data.requestId}/confirm-purchase`)
             }
             else {
                 setMessage('Error al generar la reserva');
