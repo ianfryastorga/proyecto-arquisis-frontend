@@ -17,6 +17,7 @@ import DonePurchase from "./Components/Purchase/CompletedPurchase";
 import Loading from "./Components/Loading/Loading";
 import { useAuth0 } from "@auth0/auth0-react";
 import Recommendations from "./Components/Recommendations/Recommendations";
+import Heartbeat from "./Components/JobsMaster/Heartbeat";
 
 function App() {
     const { isLoading } = useAuth0();
@@ -60,6 +61,10 @@ function App() {
                 <Route
                     path="/purchaseCompleted"
                     element={<DonePurchase />}
+                />
+                <Route
+                    path="/heartbeat"
+                    element={<Heartbeat />}
                 />
                 <Route
                     path="*"

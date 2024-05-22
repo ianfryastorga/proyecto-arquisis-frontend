@@ -65,8 +65,7 @@ const FlightList = (props) => {
                     }
                 }
             )
-        })
-        .catch(error => {
+        }).catch(error => {
             console.error(error)
         })
     }

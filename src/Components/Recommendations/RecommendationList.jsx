@@ -2,9 +2,6 @@ import { useEffect } from 'react'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { LuPlane } from 'react-icons/lu'
-import moment from 'moment'
-import { IoRemoveOutline } from "react-icons/io5";
-import { GrStatusDisabled, GrStatusCritical, GrStatusGood } from "react-icons/gr";
 import { useAuth0 } from '@auth0/auth0-react'
 import FlightRoute from '../Flights/FlightRoute'
 
@@ -39,6 +36,7 @@ const RecommendationList = ({ recommendations }) => {
     return (
         <div data-aos='fade-up' data-aos-duration='1000' className='reservations flex container'> 
             <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer'>
+                <div className='reservationTitle'>Last update: {recommendations[0]?.recommendation?.createdAt}</div>
                 {recommendations.map((recommendation) => (
                     <li className="singleReservation" key={recommendation.recommendation.id}>
                         <div className='reservationElement'>
