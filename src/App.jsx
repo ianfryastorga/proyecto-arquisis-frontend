@@ -12,8 +12,12 @@ import Flight from './Components/Flights/Flight';
 import Flights from "./Components/FlightList/Flights";
 import Navbar from "./Components/Navbar/Navbar";
 import Reservations from "./Components/Reservations/Reservations";
+import ConfirmPurchase from "./Components/Purchase/ConfirmPurchase";
+import DonePurchase from "./Components/Purchase/CompletedPurchase";
 import Loading from "./Components/Loading/Loading";
 import { useAuth0 } from "@auth0/auth0-react";
+import Recommendations from "./Components/Recommendations/Recommendations";
+import Heartbeat from "./Components/JobsMaster/Heartbeat";
 
 function App() {
     const { isLoading } = useAuth0();
@@ -31,6 +35,10 @@ function App() {
                     element={<Home />}
                 />
                 <Route
+                    path="/flights/:id/:request_id/confirm-purchase"
+                    element={<ConfirmPurchase />}
+                />
+                <Route
                     path="/flights/:id"
                     element={<Flight />}
                 />
@@ -43,8 +51,20 @@ function App() {
                     element={<Reservations />}
                 />
                 <Route
+                    path="/recommendations"
+                    element={<Recommendations/>}
+                />
+                <Route
                     path="/profile"
                     element={<Profile />}
+                />
+                <Route
+                    path="/purchaseCompleted"
+                    element={<DonePurchase />}
+                />
+                <Route
+                    path="/heartbeat"
+                    element={<Heartbeat />}
                 />
                 <Route
                     path="*"

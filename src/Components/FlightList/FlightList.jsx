@@ -3,17 +3,21 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useNavigate } from 'react-router-dom'
 import { LuPlane } from "react-icons/lu";
-import { IoRemoveOutline } from "react-icons/io5";
-import moment from 'moment'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import axios from 'axios'
+import FlightRoute from '../Flights/FlightRoute';
+import { useAuth0 } from "@auth0/auth0-react"; 
+
 
 const FlightList = (props) => {
     const navigate = useNavigate();
+    const { getAccessTokenSilently } = useAuth0();
     const flights = props.flights;
     useEffect(() => {
         Aos.init({ duration: 1000 })
     }, [])
+
+    const accessToken = getAccessTokenSilently();
     
     if (!flights || flights.length === 0) {
         let text;
@@ -45,24 +49,25 @@ const FlightList = (props) => {
 
     const handlePreviousPage = () => {
         params.page = page - 1
-        axios.get(`${ process.env.BACKEND_URL }/flights`, { params: params })
-            .then(response => {
-                navigate(
-                    '/flights',
-                    {
-                        state: {
-                            params: params,
-                            flights: response.data.flights,
-                            page: response.data.page,
-                            count: response.data.count,
-                            totalCount: response.data.totalCount
-                        }
+        axios.get(`${ process.env.BACKEND_URL }/flights`, { params: params }, { headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        }}).then(response => {
+            navigate(
+                '/flights',
+                {
+                    state: {
+                        params: params,
+                        flights: response.data.flights,
+                        page: response.data.page,
+                        count: response.data.count,
+                        totalCount: response.data.totalCount
                     }
-                )
-            })
-            .catch(error => {
-                console.error(error)
-            })
+                }
+            )
+        }).catch(error => {
+            console.error(error)
+        })
     }
     const handleNextPage = () => {
         params.page = page + 1
@@ -98,8 +103,6 @@ const FlightList = (props) => {
         </button>
     ) : null
 
-    console.log(flights)
-
     return (
         <div data-aos='fade-up' data-aos-duration='1000' className='flights container'> 
             <ul data-aos='fade-up' data-aos-duration='500' className='flightsContainer'>
@@ -112,26 +115,7 @@ const FlightList = (props) => {
                 </div>
                 {flights.map((flight) => (
                     flight.quantity > quantity?(<li onClick={()=>{navigate("/flights/"+flight.id)}} className="singleFlight" key={flight.id}>
-                        <div className='flightDetails grid'>
-                            <div className='flightAirportInfo'>
-                                <h5>{flight.departureAirportId} - {flight.departureAirportName}</h5>
-                                <h6>{moment(flight.departureTime, "YYYY-MM-DD HH:mm:ss").format("DD/MM/YYYY")}</h6>
-                                <h6>{moment(flight.departureTime, "YYYY-MM-DD HH:mm:ss").format("HH:mm")}</h6>
-                            </div>
-                            <div className='middleList'>
-                                <div className='flightLogo'>
-                                    <IoRemoveOutline/><LuPlane /><IoRemoveOutline/>
-                                </div>
-                                <div className='flightDuration'>
-                                    { flight.duration > 60 ? Math.floor(flight.duration / 60) + 'h ' + flight.duration % 60 + 'm' : flight.duration + 'm'}
-                                </div>
-                            </div>
-                            <div className='flightAirportInfo'>
-                                <h5>{flight.arrivalAirportId} - {flight.arrivalAirportName}</h5>
-                                <h6>{moment(flight.arrivalTime, "YYYY-MM-DD HH:mm:ss").format("DD/MM/YYYY")}</h6>
-                                <h6>{moment(flight.arrivalTime, "YYYY-MM-DD HH:mm:ss").format("HH:mm")}</h6>
-                            </div>
-                        </div>
+                        < FlightRoute flight={flight} />
                         <div className='price'>
                             { flight.currency } { flight.price }
                         </div>
