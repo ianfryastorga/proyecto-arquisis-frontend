@@ -32,7 +32,7 @@ jobs:
       run: npm run lint
 
     #- name: Run tests
-    # run: npm test
+    #  run: npm test
 
   build-and-deploy:
     needs: test-and-lint
@@ -54,11 +54,6 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Checkout dist branch
-      run: |
-        git fetch origin
-        git checkout dist
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -67,7 +62,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Deploy to S3
-      run: aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --delete
+      run: aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
 
     - name: Invalidate CloudFront cache
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
