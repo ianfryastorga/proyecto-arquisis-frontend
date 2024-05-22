@@ -30,6 +30,8 @@ const Navbar = () => {
                         <li onClick={()=>{navigate("/flights")}} className="listItem">Oferta de vuelos</li>
                         {isAuthenticated &&
                         <li onClick={()=>{navigate("/reservations")}} className="listItem">Mis compras</li>}
+                        {isAuthenticated &&
+                        <li onClick={()=>{navigate("/recommendations")}} className="listItem">Recomendaciones</li>}
                     </ul>
                 </div>
                 <div className='menu flex'> 

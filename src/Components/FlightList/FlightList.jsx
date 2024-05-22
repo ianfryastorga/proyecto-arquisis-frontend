@@ -6,13 +6,18 @@ import { LuPlane } from "react-icons/lu";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import axios from 'axios'
 import FlightRoute from '../Flights/FlightRoute';
+import { useAuth0 } from "@auth0/auth0-react"; 
+
 
 const FlightList = (props) => {
     const navigate = useNavigate();
+    const { getAccessTokenSilently } = useAuth0();
     const flights = props.flights;
     useEffect(() => {
         Aos.init({ duration: 1000 })
     }, [])
+
+    const accessToken = getAccessTokenSilently();
     
     if (!flights || flights.length === 0) {
         let text;
@@ -44,24 +49,25 @@ const FlightList = (props) => {
 
     const handlePreviousPage = () => {
         params.page = page - 1
-        axios.get(`${ process.env.BACKEND_URL }/flights`, { params: params })
-            .then(response => {
-                navigate(
-                    '/flights',
-                    {
-                        state: {
-                            params: params,
-                            flights: response.data.flights,
-                            page: response.data.page,
-                            count: response.data.count,
-                            totalCount: response.data.totalCount
-                        }
+        axios.get(`${ process.env.BACKEND_URL }/flights`, { params: params }, { headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        }}).then(response => {
+            navigate(
+                '/flights',
+                {
+                    state: {
+                        params: params,
+                        flights: response.data.flights,
+                        page: response.data.page,
+                        count: response.data.count,
+                        totalCount: response.data.totalCount
                     }
-                )
-            })
-            .catch(error => {
-                console.error(error)
-            })
+                }
+            )
+        }).catch(error => {
+            console.error(error)
+        })
     }
     const handleNextPage = () => {
         params.page = page + 1
@@ -96,8 +102,6 @@ const FlightList = (props) => {
             <FaAngleRight onClick={handleNextPage}/>
         </button>
     ) : null
-
-    console.log(flights)
 
     return (
         <div data-aos='fade-up' data-aos-duration='1000' className='flights container'> 
