@@ -32,12 +32,12 @@ jobs:
       run: npm run lint
 
     #- name: Run tests
-     # run: npm test
+    # run: npm test
 
   build-and-deploy:
     needs: test-and-lint
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devops'
 
     steps:
     - name: Checkout code
