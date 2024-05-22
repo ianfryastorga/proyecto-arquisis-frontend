@@ -3,13 +3,13 @@ name: Test, Lint and Deploy Workflow
 on:
   pull_request:
     branches:
-      - main  # Ajusta esto para que coincida con tu rama principal
+      - main 
       - dev
       - devops
 
   push:
     branches:
-      - main  # Despliega cuando hay un push a main
+      - main  
       - devops
 
 jobs:
