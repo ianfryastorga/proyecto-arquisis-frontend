@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from "react";
+import Loading from "../Loading/Loading";
 
 const DonePurchase = () => {
     const [searchParams] = useSearchParams();
@@ -15,7 +16,8 @@ const DonePurchase = () => {
     const commitTransaction = async () => {
         try {
             const response = await axios.post(`${ process.env.BACKEND_URL }/requests/commit`, {
-                ws_token: searchParams.get('token_ws')
+                ws_token: searchParams.get('token_ws'),
+                tbk_token: searchParams.get('TBK_TOKEN')
             });
             return response.data;
         } catch (error) {
@@ -25,15 +27,13 @@ const DonePurchase = () => {
 
     const {data, isLoading} = useQuery({
         queryKey: ['completed-purchase'],
-        queryFn: () => commitTransaction({ token: searchParams.get('token_ws') || '' })
+        queryFn: () => commitTransaction({ token: searchParams.get('token_ws') || '', cancelledToken: searchParams.get('TBK_TOKEN') || ''})
         
     })
 
     if (isLoading) {
         return (
-            <div className="p-20">
-                <h1>Loading...</h1>
-            </div>
+            <Loading />
         )
     }
 
