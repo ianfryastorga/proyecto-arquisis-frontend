@@ -1,5 +1,3 @@
-# Untitled
-
 # Documentación para Replicar Continous Deploy Serverless en Frontend
 
 Esta guía detalla los pasos necesarios para configurar el despliegue continuo de un frontend en un entorno serverless utilizando GitHub Actions y servicios de AWS como S3 y CloudFront.
