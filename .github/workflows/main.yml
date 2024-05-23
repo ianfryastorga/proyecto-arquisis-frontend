@@ -1,10 +1,16 @@
-name: Test and Lint Workflow
+name: Test, Lint and Deploy Workflow
 
 on:
   pull_request:
     branches:
-      - main  # Adjust this to match your main branch name
+      - main 
       - dev
+      - devops
+
+  push:
+    branches:
+      - main  
+      - devops
 
 jobs:
   test-and-lint:
@@ -25,5 +31,47 @@ jobs:
     - name: Lint with npm
       run: npm run lint
 
-    - name: Dummy Action
-      run: echo "Hello, world!"
+    #- name: Run tests
+    #  run: npm test
+
+  build-and-deploy:
+    needs: test-and-lint
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/devops'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: yarn ci
+
+    - name: Create .env file
+      run: |
+        echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
+        echo "REACT_APP_AUTH0_CLIENT_ID=${{ secrets.REACT_APP_AUTH0_CLIENT_ID }}" >> .env
+        echo "BACKEND_URL=${{ secrets.BACKEND_URL }}" >> .env
+
+    - name: Build project
+      run: npm run build
+
+    - name: Copy .env file to dist directory
+      run: cp .env dist/.env
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Deploy to S3
+      run: aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+
+    - name: Invalidate CloudFront cache
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
