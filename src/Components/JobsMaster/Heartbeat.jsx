@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { MdOutlineRecommend } from "react-icons/md";
 
 const Heartbeat = () => {
-    const [available, setAvailable] = useState("false");
+    const [available, setAvailable] = useState(false);
     
     useEffect(() => {
         const fetchAvailable = async () => {
             try {
                 const response = await axios.get(`${ process.env.BACKEND_URL }/recommendations/heartbeat`);
-                setAvailable(`${response.data.status}`);
+                setAvailable(response.data.status);
             } catch (error) {
-                setAvailable("false");
+                setAvailable(false);
             }
         };
         fetchAvailable();
@@ -18,11 +19,9 @@ const Heartbeat = () => {
 
 
     return (
-        <div className="profile">
-            <div className="profileContainer">
-                <h2>Disponible: {available}</h2>
-            </div>
-        </div>
+        <>
+            {available ? ( <MdOutlineRecommend color="green" /> ) : (  <MdOutlineRecommend color="red" /> )}
+        </>
     );
 };
 

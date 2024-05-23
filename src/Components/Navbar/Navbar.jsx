@@ -5,6 +5,7 @@ import LogoutButton from '../Forms/LogOutButton';
 import SignupButton from '../Forms/SignUpButton';
 import ProfileButton from '../Profile/ProfileButton';
 import { useAuth0 } from "@auth0/auth0-react";
+import Heartbeat from '../JobsMaster/Heartbeat';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -35,6 +36,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className='menu flex'> 
+                    {isAuthenticated && < Heartbeat />}
                     <ProfileButton/>
                     <LoginButton/>
                     <LogoutButton/>
