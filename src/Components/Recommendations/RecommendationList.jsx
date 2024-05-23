@@ -4,8 +4,10 @@ import 'aos/dist/aos.css'
 import { LuPlane } from 'react-icons/lu'
 import { useAuth0 } from '@auth0/auth0-react'
 import FlightRoute from '../Flights/FlightRoute'
+import { useNavigate } from 'react-router-dom'
 
 const RecommendationList = ({ recommendations }) => {
+    const navigate = useNavigate();
     useEffect(() => {
         Aos.init({ duration: 1000 })
     }, [])
@@ -22,7 +24,7 @@ const RecommendationList = ({ recommendations }) => {
         return (
             <div className='reservations'>
                 <div data-aos='fade-up' data-aos-duration='2000' className='flights grid container'>
-                    <div data-aos='fade-up' data-aos-duration='1000' className='flightsContainer'>
+                    <div data-aos='fade-up' data-aos-duration='1000' className='flightsContainer section'>
                         <div className='noFlight'>
                             <LuPlane size={120} style={{color: "lightGray" , strokeWidth: "2px"}}/>
                             <h3>{text}</h3>
@@ -38,7 +40,7 @@ const RecommendationList = ({ recommendations }) => {
             <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer'>
                 <div className='reservationTitle'>Last update: {recommendations[0]?.recommendation?.createdAt}</div>
                 {recommendations.map((recommendation) => (
-                    <li className="singleReservation" key={recommendation.recommendation.id}>
+                    <li onClick={()=>{navigate("/flights/"+recommendation.flight.id)}} className="singleReservation" key={recommendation.recommendation.id}>
                         <div className='reservationElement'>
                             < FlightRoute flight={recommendation.flight} />
                         </div>

@@ -24,7 +24,7 @@ const RequestList = ({ requests }) => {
         return (
             <div className='reservations'>
                 <div data-aos='fade-up' data-aos-duration='2000' className='flights grid container'>
-                    <div data-aos='fade-up' data-aos-duration='1000' className='flightsContainer'>
+                    <div data-aos='fade-up' data-aos-duration='1000' className='flightsContainer section'>
                         <div className='noFlight'>
                             <LuPlane size={120} style={{color: "lightGray" , strokeWidth: "2px"}}/>
                             <h3>{text}</h3>
