@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { MdOutlineRecommend } from "react-icons/md";
+import { MdFlight } from "react-icons/md";
 
 const Heartbeat = () => {
     const [available, setAvailable] = useState(false);
@@ -20,7 +20,7 @@ const Heartbeat = () => {
 
     return (
         <>
-            {available ? ( <MdOutlineRecommend color="green" /> ) : (  <MdOutlineRecommend color="red" /> )}
+            {available ? ( <MdFlight color="green" /> ) : (  <MdFlight color="red" /> )}
         </>
     );
 };
