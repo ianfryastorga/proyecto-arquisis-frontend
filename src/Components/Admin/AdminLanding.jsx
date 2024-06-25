@@ -31,6 +31,8 @@ const Landing = () => {
     const [ownAuctions, setAuctions] = useState([])
     const [othersAuctions, setOthers] = useState([])
 
+    setProposals([]);
+
     useEffect(() => {
         const getTokenAndRoles = async () => {
             try {
@@ -53,7 +55,7 @@ const Landing = () => {
                 return navigate('/');
             }
         }
-    }, [isLoading, isAuthenticated, user, token, roles]);
+    }, [isLoading, isAuthenticated, user, token, roles, getAccessTokenSilently, navigate]);
 
     useEffect(() => {
         if (token) {
@@ -81,8 +83,7 @@ const Landing = () => {
                 })
                 .catch(error => {
                     console.error(error)
-                }
-            );
+                });
         }
     }, [token])
 

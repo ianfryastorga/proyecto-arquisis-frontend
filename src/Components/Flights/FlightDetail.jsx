@@ -17,6 +17,12 @@ const FlightDetail = ({ flight, availableSeats, groupSeats, onReserveTicket, pas
         Aos.init({ duration: 1000 })
     }, [])
 
+    useEffect(() => {
+        if (user && user[`${process.env.AUTH0_NAMESPACE}/roles`].includes('admin')) {
+            setMax(20);
+        }
+    }, [user]);
+    
     if (!isLoading && !isAuthenticated) {
         loginWithRedirect();
         return;
@@ -26,11 +32,6 @@ const FlightDetail = ({ flight, availableSeats, groupSeats, onReserveTicket, pas
         return <p>Cargando datos del vuelo...</p>;
     }
 
-    useEffect(() => {
-        if (user && user[`${process.env.AUTH0_NAMESPACE}/roles`].includes('admin')) {
-            setMax(20);
-        }
-    }, [user]);
 
 
     return (

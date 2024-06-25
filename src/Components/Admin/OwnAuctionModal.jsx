@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Modal from "react-modal";
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { LuPlane } from "react-icons/lu";
 import { IoRemoveOutline } from "react-icons/io5";
 import moment from "moment";
-import PassengerInput from "../Flights/PassengerInfo";
 
 function OwnAuctionModal({request, modalOpen, setModalOpen} ) {
     useEffect(() => {

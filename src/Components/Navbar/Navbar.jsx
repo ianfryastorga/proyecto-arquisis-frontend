@@ -11,17 +11,6 @@ const Navbar = () => {
     const navigate = useNavigate();
     const { isLoading, isAuthenticated, user } = useAuth0();
 
-    if (isLoading) {
-        return <div></div>;
-    }
-
-    let roles = null;
-
-    if (user) {
-        const namespace = 'user';
-        roles = user[`${namespace}/roles`] || [];
-    }
-
     const [noBg, addBg] = useState('navBarTwo');
     const addBgColor = () => {
         if (window.scrollY >= 10) {
@@ -31,6 +20,17 @@ const Navbar = () => {
         }
     }
     window.addEventListener('scroll', addBgColor)
+
+    if (isLoading) {
+        return <div></div>;
+    }
+    
+    let roles = null;
+
+    if (user) {
+        const namespace = 'user';
+        roles = user[`${namespace}/roles`] || [];
+    }
 
     return (
         <div className='navBar flex'>

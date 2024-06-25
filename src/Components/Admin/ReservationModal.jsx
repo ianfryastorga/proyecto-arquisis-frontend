@@ -21,12 +21,12 @@ function ReservationModal({request, modalOpen, setModalOpen} ) {
         }
         console.log(request);
         axios.post(`${ process.env.BACKEND_URL }/auctions/submit`, {
-                "departureAirport": request.departureAirportId,
-                "arrivalAirport": request.arrivalAirportId,
-                "departureTime": request.departureTime,
-                "airline": request.airline,
-                "quantity": passenger,
-                "groupId": 11
+            "departureAirport": request.departureAirportId,
+            "arrivalAirport": request.arrivalAirportId,
+            "departureTime": request.departureTime,
+            "airline": request.airline,
+            "quantity": passenger,
+            "groupId": 11
         }).then(response => {
             console.log(response.data);
             setModalOpen(false);

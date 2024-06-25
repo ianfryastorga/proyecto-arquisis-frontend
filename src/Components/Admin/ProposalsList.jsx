@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import { LuPlane } from 'react-icons/lu'
-import moment from 'moment'
 import ProposalModal from './ProposalModal'
 
 const ProposalsList = ({ requests }) => {
