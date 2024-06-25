@@ -12,6 +12,7 @@ const Flight = () => {
     const { id } = useParams();
     const [flightData, setFlightData] = useState(null);
     const [availableSeats, setAvailableSeats] = useState(0);
+    const [groupSeats, setGroupSeats] = useState(0);
     const { user } = useAuth0();
     const [modalOpen, setModalOpen] = useState(false);
     const [message, setMessage] = useState('');
@@ -24,6 +25,7 @@ const Flight = () => {
                 const response = await axios.get(`${ process.env.BACKEND_URL }/flights/${id}`);
                 setFlightData(response.data);
                 setAvailableSeats(response.data.quantity);
+                setGroupSeats(response.data.booked);
                 if (response.data.quantity < 0) {
                     setAvailableSeats(0);
                 }
@@ -42,13 +44,19 @@ const Flight = () => {
             .catch(error => console.log(error))
     }, [])
     
-    const handleReserveTicket = (quantity) => {
-        if (quantity > availableSeats || quantity < 1 || quantity > 4) {
+    const handleReserveTicket = (quantity, seatsAvailable, isBooked) => {
+        let seller = 0;
+        let max = 4;
+        if (user && user[`${process.env.AUTH0_NAMESPACE}/roles`].includes('admin')) {
+            seller = 11;
+            max = seatsAvailable;
+        }
+        if (quantity > seatsAvailable || quantity < 1 || quantity > max) {
             setMessage('Cantidad de asientos no es válida');
             setModalOpen(true);
             return;
         }
-        axios.post(`${ process.env.BACKEND_URL }/requests`,  {
+        axios.post(`${ process.env.BACKEND_URL }/requests`, {
             "requestId":"uuid",
             "groupId":"11",
             "departureAirport":flightData.departureAirportId,
@@ -57,10 +65,11 @@ const Flight = () => {
             "datetime": moment().tz("America/Santiago").format("YYYY-MM-DD HH:mm:ss"),
             "depositToken":"",
             "quantity":passengers,
-            "seller":0,
+            "seller": seller,
             "username": user.name,
             "ipAddress": ipAddress,
             "price": flightData.price,
+            "isBooked": isBooked
         }).then(response => {
             console.log(response.data);
             if (response.data?.url && response.data?.depositToken) {
@@ -82,6 +91,7 @@ const Flight = () => {
                 <FlightDetail
                     flight={flightData}
                     availableSeats={availableSeats}
+                    groupSeats={groupSeats}
                     onReserveTicket={handleReserveTicket}
                     passengers={passengers}
                     setPassengers={setPassengers}

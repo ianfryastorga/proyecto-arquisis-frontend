@@ -9,9 +9,8 @@ import Heartbeat from '../JobsMaster/Heartbeat';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { isAuthenticated } = useAuth0();
+    const { isLoading, isAuthenticated, user } = useAuth0();
 
-    // add bgcolor on second nabVar
     const [noBg, addBg] = useState('navBarTwo');
     const addBgColor = () => {
         if (window.scrollY >= 10) {
@@ -22,6 +21,17 @@ const Navbar = () => {
     }
     window.addEventListener('scroll', addBgColor)
 
+    if (isLoading) {
+        return <div></div>;
+    }
+    
+    let roles = null;
+
+    if (user) {
+        const namespace = 'user';
+        roles = user[`${namespace}/roles`] || [];
+    }
+
     return (
         <div className='navBar flex'>
             <div className={noBg}>
@@ -29,10 +39,12 @@ const Navbar = () => {
                     <ul className="menu flex">
                         <li onClick={()=>{navigate("/")}} className="listItem">Home</li>
                         <li onClick={()=>{navigate("/flights")}} className="listItem">Oferta de vuelos</li>
-                        {isAuthenticated &&
+                        {isAuthenticated && !roles.includes('admin') && 
                         <li onClick={()=>{navigate("/reservations")}} className="listItem">Mis compras</li>}
-                        {isAuthenticated &&
+                        {isAuthenticated && !roles.includes('admin') && 
                         <li onClick={()=>{navigate("/recommendations")}} className="listItem">Recomendaciones</li>}
+                        {isAuthenticated && roles.includes('admin') && 
+                        <li onClick={()=>{navigate("/admin")}} className="listItem">Administración</li>}
                     </ul>
                 </div>
                 <div className='menu flex'> 

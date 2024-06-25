@@ -7,7 +7,7 @@ const SignupButton = () => {
             <button
                 className="btn btnTwo"
                 onClick={() =>
-                    loginWithRedirect({screen_hint: 'signup'})
+                    loginWithRedirect({authorizationParams: {screen_hint: 'signup'}})
                 }
             >
                 Registrarse
