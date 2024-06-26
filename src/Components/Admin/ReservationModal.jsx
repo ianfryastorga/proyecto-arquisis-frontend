@@ -10,6 +10,7 @@ import axios from "axios";
 
 function ReservationModal({token, request, modalOpen, setModalOpen} ) {
     const [passenger, setPassenger] = useState(0);
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         Aos.init({ duration: 1000 })
@@ -35,6 +36,7 @@ function ReservationModal({token, request, modalOpen, setModalOpen} ) {
             console.log(response.data);
             setModalOpen(false);
         }).catch(error => {
+            setMessage('Error al crear subasta');
             console.error(error)
         });
     };
@@ -74,9 +76,10 @@ function ReservationModal({token, request, modalOpen, setModalOpen} ) {
                         <div className='requestTitle'>¿Desea crear una subasta con los asientos disponibles?</div>
                         < PassengerInput max={request.booked} passengers={passenger} setPassengers={setPassenger} />
                     </div>
+                    <div className="singlePadding">{message}</div>
                     <div className="flex justifyEvenly">
                         <button className="btn" onClick={() => handleCreateSubmission()}>Crear Subasta</button>
-                        <button className="btn noBg" onClick={() => setModalOpen(false)}>Cerrar</button>
+                        <button className="btn noBg" onClick={() => {setMessage("");setModalOpen(false)}}>Cerrar</button>
                     </div>
                 </div>
             </Modal>

@@ -114,7 +114,7 @@ function ProposalModal({token, request, modalOpen, setModalOpen} ) {
                     <div className="flex justifyEvenly">
                         <button className="btn" onClick={() => handleProposal("acceptance")}>Aceptar</button>
                         <button className="btn noBg" onClick={() => handleProposal("rejection")}>Rechazar</button>
-                        <button className="btn noBg" onClick={() => setModalOpen(false)}>Cerrar</button>
+                        <button className="btn noBg" onClick={() => {setMessage("");setModalOpen(false)}}>Cerrar</button>
                     </div>
                 </div>
             </Modal>
