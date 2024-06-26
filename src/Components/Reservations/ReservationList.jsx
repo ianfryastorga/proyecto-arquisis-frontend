@@ -22,7 +22,7 @@ const RequestList = ({ requests }) => {
     if (!requests || requests.length === 0) {
         const text = 'Busca vuelos para verlos aquí'
         return (
-            <div className='reservations'>
+            <div className='reservations topPageMargin'>
                 <div data-aos='fade-up' data-aos-duration='2000' className='flights grid container'>
                     <div data-aos='fade-up' data-aos-duration='1000' className='flightsContainer section'>
                         <div className='noFlight'>
@@ -37,7 +37,7 @@ const RequestList = ({ requests }) => {
 
     return (
         <div data-aos='fade-up' data-aos-duration='1000' className='reservations flex container'> 
-            <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer'>
+            <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer topPageMargin'>
                 {requests.map((request) => (
                     <li className="singleReservation" key={request.id}>
                         <div className='reservationElement'>
