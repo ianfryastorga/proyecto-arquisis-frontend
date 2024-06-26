@@ -17,7 +17,7 @@ const ReservationsList = ({token, requests }) => {
         <div data-aos='fade-up' data-aos-duration='1000' className='reservations flex column'>
             < ReservationModal token={token} request={activeRequest} modalOpen={reservationModal} setModalOpen={setReservationModal} /> 
             <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer adminReservations'>
-                {requests.map((request) => (
+                {requests && requests.map((request) => (
                     <li className="singleReservation" key={request.id} onClick={() => {setRequest(request); setReservationModal(true);}}>
                         <div className='reservationElement'>
                             <div className='requestTitle'>Origen</div>

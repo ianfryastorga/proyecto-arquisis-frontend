@@ -17,7 +17,7 @@ const OwnAuctionsList = ({ requests }) => {
         <div data-aos='fade-up' data-aos-duration='1000' className='reservations flex column'> 
             < OwnAuctionModal request={activeRequest} modalOpen={modal} setModalOpen={setModal} />
             <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer adminReservations'>
-                {requests.map((request) => (
+                {requests && requests.map((request) => (
                     <li className="singleReservation" key={request.id} onClick={() => {setRequest(request); setModal(true);}}>
                         <div className='reservationElement'>
                             <div className='requestTitle'>Origen</div>
