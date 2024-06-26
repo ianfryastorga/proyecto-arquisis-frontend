@@ -83,9 +83,18 @@ li {
   padding: 1rem;
 }
 
+.paddingLeft {
+  padding-left: 3rem;
+}
+
 .topPageMargin {
   margin: 0;
   margin-top: 8rem;
+}
+
+.bottomPageMargin {
+  margin: 0;
+  margin-bottom: 1rem;
 }
 
 .justifyEvenly {
@@ -94,6 +103,11 @@ li {
 
 .justifyBetween {
   justify-content: space-between;
+}
+
+select {
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 .none {
@@ -797,7 +811,7 @@ h2 {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         overflow-y: scroll;
-        max-height: 40rem;
+        max-height: 55rem;
         
 
         .singleFlight {
@@ -837,6 +851,8 @@ h2 {
       justify-content: center;
       text-align: center;
       width: 100%;
+      overflow-y: auto;
+      max-height: 20rem;
 
       .title {
         padding-bottom: 1rem;

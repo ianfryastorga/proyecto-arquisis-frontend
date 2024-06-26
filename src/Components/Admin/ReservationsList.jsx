@@ -5,7 +5,7 @@ import { LuPlane } from 'react-icons/lu'
 import moment from 'moment'
 import ReservationModal from './ReservationModal'
 
-const ReservationsList = ({ requests }) => {
+const ReservationsList = ({token, requests }) => {
     const [reservationModal, setReservationModal] = useState(false);
     const [activeRequest, setRequest] = useState(null);
 
@@ -15,7 +15,7 @@ const ReservationsList = ({ requests }) => {
 
     return (
         <div data-aos='fade-up' data-aos-duration='1000' className='reservations flex column'>
-            < ReservationModal request={activeRequest} modalOpen={reservationModal} setModalOpen={setReservationModal} /> 
+            < ReservationModal token={token} request={activeRequest} modalOpen={reservationModal} setModalOpen={setReservationModal} /> 
             <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer adminReservations'>
                 {requests.map((request) => (
                     <li className="singleReservation" key={request.id} onClick={() => {setRequest(request); setReservationModal(true);}}>

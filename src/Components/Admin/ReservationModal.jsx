@@ -8,7 +8,7 @@ import moment from "moment";
 import PassengerInput from "../Flights/PassengerInfo";
 import axios from "axios";
 
-function ReservationModal({request, modalOpen, setModalOpen} ) {
+function ReservationModal({token, request, modalOpen, setModalOpen} ) {
     const [passenger, setPassenger] = useState(0);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ function ReservationModal({request, modalOpen, setModalOpen} ) {
     }, [])
 
     const handleCreateSubmission = () => {
-        if (passenger > request.booked|| passenger < 1) {
+        if (passenger > request.booked || passenger < 1) {
             return;
         }
         console.log(request);
@@ -27,6 +27,10 @@ function ReservationModal({request, modalOpen, setModalOpen} ) {
             "airline": request.airline,
             "quantity": passenger,
             "groupId": 11
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then(response => {
             console.log(response.data);
             setModalOpen(false);
@@ -67,7 +71,7 @@ function ReservationModal({request, modalOpen, setModalOpen} ) {
                         </div>
                     </div>
                     <div className="auction">
-                        <div className='requestTitle'>¿ Desea crear una subasta con los asientos disponibles?</div>
+                        <div className='requestTitle'>¿Desea crear una subasta con los asientos disponibles?</div>
                         < PassengerInput max={request.booked} passengers={passenger} setPassengers={setPassenger} />
                     </div>
                     <div className="flex justifyEvenly">

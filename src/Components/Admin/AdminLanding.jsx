@@ -31,8 +31,6 @@ const Landing = () => {
     const [ownAuctions, setAuctions] = useState([])
     const [othersAuctions, setOthers] = useState([])
 
-    setProposals([]);
-
     useEffect(() => {
         const getTokenAndRoles = async () => {
             try {
@@ -55,7 +53,7 @@ const Landing = () => {
                 return navigate('/');
             }
         }
-    }, [isLoading, isAuthenticated, user, token, roles, getAccessTokenSilently, navigate]);
+    }, [isLoading, isAuthenticated, user, token, roles]);
 
     useEffect(() => {
         if (token) {
@@ -86,6 +84,34 @@ const Landing = () => {
                 });
         }
     }, [token])
+
+    useEffect(() => {
+        // Aquí debes establecer el token y las propias subastas (ownAuctions) en algún punto,
+        // como en otro useEffect que obtenga esos valores
+
+        if (token) {
+            const fetchProposals = async () => {
+                try {
+                    const allProposals = [];
+                    for (let auction of ownAuctions) {
+                        console.log("Subasta activa:", auction);
+                        const response = await axios.get(`${ process.env.BACKEND_URL }/proposals/auction/${auction.auctionId}`, { 
+                            headers: {
+                                "content-type": "application/json",
+                                Authorization: `Bearer ${token}`
+                            }
+                        });
+                        console.log("Propuestas:", response.data);
+                        allProposals.push(...response.data);
+                    }
+                    setProposals(allProposals);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            fetchProposals();
+        }
+    }, [token, ownAuctions]);
 
     useEffect(() => {
         if (token) {
@@ -181,19 +207,19 @@ const Landing = () => {
                 <div className="flex column singleGap upCenter" data-aos='fade-up' data-aos-duration='2500'>
                     <div data-aos='fade-up' data-aos-duration='1000' className="sideMenu singlePadding">
                         <div className='title'>Reservas del grupo</div>
-                        < ReservationsList requests={reservations} />
+                        < ReservationsList token={token} requests={reservations} />
                     </div>
                     <div data-aos='fade-up' data-aos-duration='1000' className="sideMenu singlePadding">
                         <div className='title'>Subastas Propias</div>
-                        < OwnAuctionsList requests={ownAuctions} />
+                        < OwnAuctionsList token={token} requests={ownAuctions} />
                     </div>
                     <div data-aos='fade-up' data-aos-duration='1000' className="sideMenu singlePadding">
                         <div className='title'>Propuestas</div>
-                        < ProposalsList requests={proposals} />
+                        < ProposalsList token={token} requests={proposals} />
                     </div>
                     <div data-aos='fade-up' data-aos-duration='1000' className="sideMenu singlePadding">
                         <div className='title'>Subastas disponibles</div>
-                        < OthersAuctionsList requests={othersAuctions} />
+                        < OthersAuctionsList token={token} requests={othersAuctions} ownReservations={reservations} />
                     </div>
                 </div>
             </div>

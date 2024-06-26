@@ -5,19 +5,20 @@ import { LuPlane } from 'react-icons/lu'
 import moment from 'moment'
 import OthersAuctionModal from './OthersAuctionModal'
 
-const OthersAuctionsList = ({ requests }) => {
+const OthersAuctionsList = ({token, requests, ownReservations }) => {
     const [modal, setModal] = useState(false);
+    const [activeRequest, setRequest] = useState(null);
 
     useEffect(() => {
         Aos.init({ duration: 1000 })
     }, [])
 
     return (
-        <div className='reservations flex column'> 
-            < OthersAuctionModal modalOpen={modal} setModalOpen={setModal} />
-            <ul className='reservationsContainer adminReservations'>
+        <div data-aos='fade-up' data-aos-duration='1000' className='reservations flex column'> 
+            < OthersAuctionModal token={token} ownReservations={ownReservations} request={activeRequest} modalOpen={modal} setModalOpen={setModal} />
+            <ul data-aos='fade-up' data-aos-duration='500' className='reservationsContainer adminReservations'>
                 {requests.map((request) => (
-                    <li className="singleReservation" key={request.id} onClick={() => {setModal(true)}}>
+                    <li className="singleReservation" key={request.id} onClick={() => {setRequest(request); setModal(true);}}>
                         <div className='reservationElement'>
                             <div className='requestTitle'>Origen</div>
                             <div className='requestInfo'>{request.departureAirport}</div>
