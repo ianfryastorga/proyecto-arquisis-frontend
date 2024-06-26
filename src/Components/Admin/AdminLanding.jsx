@@ -53,7 +53,7 @@ const Landing = () => {
                 return navigate('/');
             }
         }
-    }, [isLoading, isAuthenticated, user, token, roles]);
+    }, [isLoading, isAuthenticated, user, token, roles, getAccessTokenSilently, navigate]);
 
     useEffect(() => {
         if (token) {

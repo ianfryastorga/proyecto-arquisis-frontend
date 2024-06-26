@@ -28,7 +28,7 @@ function ProposalModal({token, request, modalOpen, setModalOpen} ) {
                 console.error(error)
             });
         }
-    }, [request])
+    }, [request, token])
 
     const handleProposal = (value) => {
         if (request) {
