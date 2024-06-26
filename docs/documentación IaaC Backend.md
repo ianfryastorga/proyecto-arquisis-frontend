@@ -24,9 +24,9 @@ Sigue las instrucciones en la [guía oficial de Terraform](https://developer.has
 ### 3. Obtener credenciales necesarias para configurar Terraform
 
 1. Ve a EC2 en Amazon AWS y selecciona "Lanzar instancia". Desde aquí debes obtener el AMI ID, Key y la región.
-2. Crea el archivo `main.tf` con la siguiente información, cambiando los valores de `ami`, `key_name` y `region` por los correspondientes:
+2. Crea el archivo `main.tf` con la siguiente información, cambiando los valores de `ami`, `key_name` y `region` por los obtenidos:
 
-\`\`\`hcl
+```
 terraform {
   required_providers {
     aws = {
@@ -84,12 +84,11 @@ output "elastic_ip" {
 output "ssh_command" {
   value = "ssh -i ${aws_instance.my_instance.key_name}.pem ubuntu@${aws_eip.my_eip.public_ip}"
 }
-\`\`\`
+```
 
 ### 4. Crear el archivo `scripts/deployment.sh`
 
-\`\`\`bash
-#!/bin/bash
+```
 
 # Actualizar el sistema
 sudo apt update -y
@@ -120,7 +119,7 @@ sudo systemctl enable nginx
 # Imprimir el estado de Docker y NGINX
 sudo systemctl status docker
 sudo systemctl status nginx
-\`\`\`
+```
 
 Este archivo instalará Docker y NGINX dentro de la instancia.
 
