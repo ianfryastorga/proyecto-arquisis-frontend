@@ -194,7 +194,7 @@ const Landing = () => {
                         </div>
                     </div>
                     <div className='flights'>
-                        {flights.map((flight) => (
+                        {flights && flights.map((flight) => (
                             <li onClick={()=>{navigate("/flights/"+flight.id)}} className="singleFlight" key={flight.id}>
                                 < FlightRoute flight={flight} />
                                 <div className='price'>
