@@ -55,7 +55,9 @@ jobs:
       run: |
         echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
         echo "REACT_APP_AUTH0_CLIENT_ID=${{ secrets.REACT_APP_AUTH0_CLIENT_ID }}" >> .env
+        echo "REACT_APP_AUTH0_AUDIENCE=${{ secrets.REACT_APP_AUTH0_AUDIENCE }}" >> .env
         echo "BACKEND_URL=${{ secrets.BACKEND_URL }}" >> .env
+        echo "AUTH0_NAMESPACE=${{ secrets.AUTH0_NAMESPACE }}" >> .env
 
     - name: Build project
       run: npm run build
