@@ -49,9 +49,6 @@ const Landing = () => {
             console.log('User:', user);
             console.log('Decoded:', decoded);
             console.log('Roles:', roles);
-            if (!roles.includes('admin')) {
-                return navigate('/');
-            }
         }
     }, [isLoading, isAuthenticated, user, token, roles, getAccessTokenSilently, navigate]);
 
